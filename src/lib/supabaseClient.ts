@@ -1,16 +1,19 @@
+"use client"  // ensures it runs only in client-side environment
+
 import { createClient } from "@supabase/supabase-js"
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+// Read env variables
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-export const supabase = createClient(
-  supabaseUrl,
-  supabaseAnonKey,
-  {
-    realtime: {
-      params: {
-        eventsPerSecond: 10,
-      },
-    },
-  }
-)
+// Check if variables exist
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("Supabase URL or anon key is missing")
+}
+
+// Create client
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  realtime: {
+    params: { eventsPerSecond: 10 },
+  },
+})
