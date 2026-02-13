@@ -3,7 +3,9 @@ import { supabase } from "@/src/lib/supabaseClient"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // CORS headers
-  res.setHeader("Access-Control-Allow-Origin", "*")
+
+  const allowedOrigin = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"; // Add your deployed URL here
+  res.setHeader("Access-Control-Allow-Origin",allowedOrigin)
   res.setHeader("Access-Control-Allow-Methods", "OPTIONS, POST")
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
 
