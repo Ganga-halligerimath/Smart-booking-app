@@ -10,11 +10,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === "OPTIONS") return res.status(200).end()
   if (req.method !== "POST") return res.status(405).end()
 
-  const { title, url, user_id } = req.body
-  if (!title || !url || !user_id)
-    return res.status(400).json({ error: "Missing title, url, or user_id" })
 
-  const { data, error } = await supabase.from("bookmarks").insert([{ title, url, user_id }])
+
+  const { title, url } = req.body;
+  if (!title || !url)
+    return res.status(400).json({ error: "Missing title or url" })
+   const { data: { session } } = await supabase.auth.getSession();
+  if (!session) return res.status(401).json({ error: "Not logged in" });
+
+  const userId = session.user.id;
+
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .insert([{ title, url, user_id: userId }]);
+
+  
+
   if (error) return res.status(400).json({ error: error.message })
 
   return res.status(200).json({ data })
