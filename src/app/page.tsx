@@ -4,9 +4,7 @@ import { supabase } from "../lib/supabaseClient"
 
 export default function Home() {
     const login = async () => {
-        const redirectUrl = process.env.NEXT_PUBLIC_APP_URL 
-            ? `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`
-            : `${window.location.origin}/dashboard`;
+        const redirectUrl = `${window.location.origin}/auth/callback`;
         
         console.log("Attempting login with redirect:", redirectUrl);
         
