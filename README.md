@@ -16,7 +16,7 @@ Delete Bookmarks – Remove your own bookmarks easily.
 
 Bookmarklet Support – Add bookmarks directly from your browser via a bookmarklet.
 
-Deployed on Vercel – Live URL: https://smart-booking-app-two.vercel.app
+Deployed on Vercel – Live URL: https://smart-book-app-nine.vercel.app
 
 Tech Stack
 
